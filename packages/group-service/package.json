@@ -1,0 +1,14 @@
+{
+  "name": "group-service",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./src",
+    "migrate": "sqlite3 ./database.sqlite < ./sdl/schema.sql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
