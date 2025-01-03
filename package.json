@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "conc npm:start:*",
+    "start": "conc -c cyan,yellow,magenta,red,green,blue npm:start:*",
     "start:api-gateway": "npm start --workspace packages/api-gateway",
     "start:app-shell": "npm start --workspace packages/app-shell",
     "start:group-mfe": "npm start --workspace packages/group-mfe",
