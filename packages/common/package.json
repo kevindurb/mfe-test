@@ -1,0 +1,19 @@
+{
+  "name": "@mfe-test/common",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {},
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "exports": {
+    "./SQL": {
+      "types": "./dist/SQL.d.ts",
+      "default": "./src/SQL.js"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { database } from './Database.js';
 import { GroupModel } from './GroupModel.js';
-import { SQL } from './SQL.js';
+import { SQL } from '@mfe-test/common/SQL';
 
 /**
  * @typedef {Object} GroupRow

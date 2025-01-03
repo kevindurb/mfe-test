@@ -1,8 +1,7 @@
 {
-  "name": "person-service",
+  "name": "@mfe-test/person-service",
   "version": "1.0.0",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
     "start": "node ./src",
     "migrate": "sqlite3 ./database.sqlite < ./sdl/schema.sql"
@@ -10,5 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@mfe-test/common": "^1.0.0"
+  }
 }
