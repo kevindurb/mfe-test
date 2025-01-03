@@ -3,8 +3,10 @@ import {
   GraphQLSchema,
   GraphQLString,
   GraphQLID,
+  GraphQLList,
 } from 'graphql';
 import { PersonRepository } from './PersonRepository.js';
+import { PersonModel } from './PersonModel.js';
 
 const personRepository = new PersonRepository();
 
@@ -26,7 +28,31 @@ const queryType = new GraphQLObjectType({
       },
       resolve: (_, { id }) => personRepository.getOne(id),
     },
+    people: {
+      type: new GraphQLList(personType),
+      resolve: () => personRepository.getAll(),
+    },
   },
 });
 
-export const schema = new GraphQLSchema({ query: queryType });
+const mutationType = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    createPerson: {
+      type: personType,
+      args: {
+        name: { type: GraphQLString },
+      },
+      resolve: (_, { name }) => {
+        const person = new PersonModel(null, name);
+        personRepository.save(person);
+        return person;
+      },
+    },
+  },
+});
+
+export const schema = new GraphQLSchema({
+  query: queryType,
+  mutation: mutationType,
+});
