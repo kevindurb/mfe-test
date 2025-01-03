@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "conc npm:start:*",
+    "start:api-gateway": "npm start --workspace packages/api-gateway",
+    "start:app-shell": "npm start --workspace packages/app-shell",
+    "start:group-mfe": "npm start --workspace packages/group-mfe",
+    "start:group-service": "npm start --workspace packages/group-service",
+    "start:person-mfe": "npm start --workspace packages/person-mfe",
+    "start:person-service": "npm start --workspace packages/person-service"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +28,8 @@
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",
+    "concurrently": "^9.1.2",
+    "http-server": "^14.1.1",
     "typescript": "^5.7.2"
   }
 }

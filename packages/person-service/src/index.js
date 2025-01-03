@@ -6,4 +6,4 @@ const app = express();
 
 app.all('/graphql', createHandler({ schema }));
 
-app.listen(1337, () => console.log('listening!'));
+app.listen(8001, () => console.log('listening!'));
