@@ -27,9 +27,11 @@
     "graphql-http": "^1.22.3"
   },
   "devDependencies": {
+    "@lit-labs/router": "^0.1.3",
     "@types/better-sqlite3": "^7.6.12",
     "concurrently": "^9.1.2",
     "http-server": "^14.1.1",
+    "lit": "^3.2.1",
     "typescript": "^5.7.2"
   }
 }

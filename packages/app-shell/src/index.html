@@ -1,17 +1,23 @@
 <!doctype html>
 <html>
-  <head>
-    <title>MFE Test</title>
-    <script type="importmap">
+
+<head>
+  <title>MFE Test</title>
+  <script type="importmap">
       {
         "imports": {
           "person-mfe": "http://localhost:3001/main.js",
-          "group-mfe": "http://localhost:3002/main.js"
+          "group-mfe": "http://localhost:3002/main.js",
+          "lit": "https://esm.sh/lit",
+          "@lit-labs/router": "https://esm.sh/@lit-labs/router"
         }
       }
     </script>
-  </head>
-  <body>
-    <script type="module" src="./main.js"></script>
-  </body>
+</head>
+
+<body>
+  <app-shell />
+  <script type="module" src="./main.js"></script>
+</body>
+
 </html>
