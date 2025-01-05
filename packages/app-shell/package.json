@@ -4,7 +4,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "start": "http-server ./src -p 3000 -o"
+    "start": "http-server ./src -p 3000 -o --proxy http://localhost:3000?"
   },
   "keywords": [],
   "author": "",

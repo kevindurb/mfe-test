@@ -3,12 +3,12 @@ import { Routes } from '@lit-labs/router';
 
 class AppShell extends LitElement {
   #routes = new Routes(this, [
-    { path: '/people/*', render: () => html`<people-mfe/>`, enter: () => import('people-mfe') },
-    { path: '/groups/*', render: () => html`<groups-mfe/>`, enter: () => import('groups-mfe') },
+    { path: '/people/*', render: () => html`<people-mfe/>`, enter: () => import('person-mfe') },
+    { path: '/groups/*', render: () => html`<groups-mfe/>`, enter: () => import('group-mfe') },
   ]);
 
   render() {
-    return this.#routes.outlet();
+    return html`${this.#routes.outlet()}`;
   }
 }
 
