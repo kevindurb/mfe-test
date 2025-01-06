@@ -35,7 +35,7 @@ class GraphQLClient {
   }
 }
 
-export const client = new GraphQLClient('http://localhost:8001/graphql');
+export const client = new GraphQLClient('http://localhost:8000/graphql');
 
 export const gql = (template, ...substitutions) =>
   String.raw(template, ...substitutions);

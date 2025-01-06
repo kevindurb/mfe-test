@@ -1,0 +1,13 @@
+---
+services:
+  cosmo:
+    image: ghcr.io/wundergraph/cosmo/router
+    volumes:
+      - ./router/compose.json:/compose.json
+      - ./router/config.yml:/config.yaml
+    environment:
+      LOG_LEVEL: debug
+      LISTEN_ADDR: 0.0.0.0:8000
+      ROUTER_CONFIG_PATH: /compose.json
+    ports:
+      - 8000:8000
