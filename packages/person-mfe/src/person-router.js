@@ -3,7 +3,7 @@ import { Routes } from '@lit-labs/router';
 import { ContextProvider } from '@lit/context';
 import { routesContext } from './routes-context.js';
 
-class PersonMFE extends LitElement {
+class PersonRouter extends LitElement {
   #routes = new Routes(this, [
     {
       path: '',
@@ -30,4 +30,4 @@ class PersonMFE extends LitElement {
   }
 }
 
-customElements.define('person-mfe', PersonMFE);
+customElements.define('person-router', PersonRouter);

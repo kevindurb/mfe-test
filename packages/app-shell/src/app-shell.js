@@ -11,18 +11,18 @@ class AppShell extends LitElement {
     },
     {
       path: '/people/*',
-      render: () => html`<person-mfe />`,
-      enter: () => import('person-mfe'),
+      render: () => html`<person-router />`,
+      enter: () => import('person-mfe/person-router.js'),
     },
     {
       path: '/groups/*',
-      render: () => html`<group-mfe />`,
-      enter: () => import('group-mfe'),
+      render: () => html`<group-router />`,
+      enter: () => import('group-mfe/group-router.js'),
     },
   ]);
 
   render() {
-    return html`${this.#router.outlet()}`;
+    return this.#router.outlet();
   }
 }
 
