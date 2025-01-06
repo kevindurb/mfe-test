@@ -16,13 +16,13 @@ class PersonDetail extends LitElement {
     personId: { type: Number },
   };
 
-  #peopleListTask = new Task(this, {
+  #personDetailTask = new Task(this, {
     task: () => client.request(personQuery, { id: this.personId }),
-    args: () => [],
+    args: () => [this.personId],
   });
 
   render() {
-    return this.#peopleListTask.render({
+    return this.#personDetailTask.render({
       complete: ({ person }) => html`<h2>${person.name}</h2>`,
     });
   }
