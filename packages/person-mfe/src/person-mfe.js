@@ -12,7 +12,7 @@ class PersonMFE extends LitElement {
     },
     {
       path: ':id',
-      render: () => html`<person-detail />`,
+      render: ({ id }) => html`<person-detail personId=${id} />`,
       enter: () => import('./person-detail.js'),
     },
   ]);
