@@ -6,17 +6,17 @@ class AppShell extends LitElement {
     {
       path: '/',
       enter: () => {
-        window.location.href = '/people';
+        window.location.href = '/people/';
       },
     },
     {
-      path: '/people*',
-      render: () => html`<people-mfe />`,
+      path: '/people/*',
+      render: () => html`<person-mfe />`,
       enter: () => import('person-mfe'),
     },
     {
-      path: '/groups*',
-      render: () => html`<groups-mfe />`,
+      path: '/groups/*',
+      render: () => html`<group-mfe />`,
       enter: () => import('group-mfe'),
     },
   ]);

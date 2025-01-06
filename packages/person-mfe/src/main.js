@@ -1,1 +1,2 @@
-console.log('person-mfe loaded!')
+console.log('person-mfe loaded!');
+import './person-mfe.js';
