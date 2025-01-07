@@ -13,6 +13,11 @@ const groupQuery = gql`
   }
 `;
 
+/**
+ * @typedef GroupQueryResult
+ * @property {{ id: number, name: string }} group
+ */
+
 class GroupDetail extends LitElement {
   static properties = {
     groupId: { type: Number },
@@ -23,6 +28,9 @@ class GroupDetail extends LitElement {
     this.groupId = null;
   }
 
+  /**
+   * @type {Task<[number], GroupQueryResult>}
+   */
   #groupDetailTask = new Task(this, {
     task: ([groupId], { signal }) =>
       client.request(groupQuery, { groupId }, { signal }),

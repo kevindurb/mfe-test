@@ -12,7 +12,15 @@ const personListQuery = gql`
   }
 `;
 
+/**
+ * @typedef PersonListQueryResult
+ * @property {{id: number, name: string}[]} people
+ */
+
 class PersonList extends LitElement {
+  /**
+   * @type {Task<[], PersonListQueryResult>}
+   */
   #personListTask = new Task(this, {
     task: (_, { signal }) => client.request(personListQuery, {}, { signal }),
     args: () => [],

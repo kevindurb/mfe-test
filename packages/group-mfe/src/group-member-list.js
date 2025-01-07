@@ -14,6 +14,17 @@ const groupMemberListQuery = gql`
   }
 `;
 
+/**
+ * @typedef Person
+ * @property {number} id
+ * @property {string} name
+ */
+
+/**
+ * @typedef GroupMemberListQueryResult
+ * @property {{ members: Person[] }} group
+ */
+
 class GroupMemberList extends LitElement {
   static properties = {
     groupId: { type: Number },
@@ -24,6 +35,9 @@ class GroupMemberList extends LitElement {
     this.groupId = null;
   }
 
+  /**
+   * @type {Task<[number], GroupMemberListQueryResult>}
+   */
   #groupMemberListTask = new Task(this, {
     task: ([groupId], { signal }) =>
       client.request(groupMemberListQuery, { groupId }, { signal }),
@@ -36,9 +50,6 @@ class GroupMemberList extends LitElement {
       ${this.#groupMemberListTask.render({
         complete: ({ group }) =>
           group.members.map(
-            /**
-             * @param {{id: number, name: string}} person
-             */
             (person) =>
               html`<li><a href="/people/${person.id}">${person.name}</a></li>`,
           ),

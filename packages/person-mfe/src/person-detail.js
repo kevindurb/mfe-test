@@ -13,6 +13,11 @@ const personQuery = gql`
   }
 `;
 
+/**
+ * @typedef PersonQueryResult
+ * @property {{ id: number, name: string }} person
+ */
+
 class PersonDetail extends LitElement {
   static properties = {
     personId: { type: Number },
@@ -23,6 +28,9 @@ class PersonDetail extends LitElement {
     this.personId = null;
   }
 
+  /**
+   * @type {Task<[number], PersonQueryResult>}
+   */
   #personDetailTask = new Task(this, {
     task: ([personId], { signal }) =>
       client.request(personQuery, { personId }, { signal }),
