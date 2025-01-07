@@ -1,16 +1,6 @@
 {
+  "extends": "../../tsconfig.base.json",
   "include": [
     "src/**/*"
   ],
-  "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "skipLibCheck": true,
-    "allowJs": true,
-    "checkJs": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "dist",
-    "declarationMap": true
-  }
 }
