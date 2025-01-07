@@ -4,6 +4,8 @@ import {
   GraphQLString,
   GraphQLID,
   GraphQLList,
+  extendSchema,
+  parse,
 } from 'graphql';
 import { GroupRepository } from './GroupRepository.js';
 import { GroupModel } from './GroupModel.js';
@@ -18,6 +20,16 @@ const groupType = new GraphQLObjectType({
     members: {
       type: new GraphQLList(GraphQLID),
       resolve: (group) => groupRepository.getMemberIds(group),
+    },
+  },
+});
+
+const personType = new GraphQLObjectType({
+  name: 'Person',
+  fields: {
+    groups: {
+      type: new GraphQLList(groupType),
+      resolve: () => [],
     },
   },
 });
@@ -73,4 +85,5 @@ const mutationType = new GraphQLObjectType({
 export const schema = new GraphQLSchema({
   query: queryType,
   mutation: mutationType,
+  types: [personType],
 });
