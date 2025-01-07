@@ -9,13 +9,13 @@ class AppRouter extends LitElement {
     {
       path: '/people/*',
       render: () => html`<person-router></person-router>`,
-      enter: () => import('person-mfe/person-router.js'),
+      enter: () => import('@mfe-test/person-mfe/person-router.js') && true,
     },
     redirect('/groups', '/groups/'),
     {
       path: '/groups/*',
       render: () => html`<group-router></group-router>`,
-      enter: () => import('group-mfe/group-router.js'),
+      enter: () => import('@mfe-test/group-mfe/group-router.js') && true,
     },
   ]);
 

@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { Task } from '@lit/task';
 import { gql } from 'graphql-tag';
-import { client } from 'app-shell/client.js';
+import { client } from '@mfe-test/common/client.js';
 
 const personGroupListQuery = gql`
   query ($personId: ID) {
@@ -19,6 +19,11 @@ class PersonGroupList extends LitElement {
     personId: { type: Number },
   };
 
+  constructor() {
+    super();
+    this.personId = null;
+  }
+
   #personGroupListTask = new Task(this, {
     task: ([personId], { signal }) =>
       client.request(personGroupListQuery, { personId }, { signal }),
@@ -31,6 +36,9 @@ class PersonGroupList extends LitElement {
       ${this.#personGroupListTask.render({
         complete: ({ person }) =>
           person.groups.map(
+            /**
+             * @param {{id: number, name: string}} group
+             */
             (group) =>
               html`<li><a href="/groups/${group.id}">${group.name}</a></li>`,
           ),

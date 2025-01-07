@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { Task } from '@lit/task';
 import { gql } from 'graphql-tag';
-import { client } from 'app-shell/client.js';
+import { client } from '@mfe-test/common/client.js';
 
 const personListQuery = gql`
   query {
@@ -18,6 +18,9 @@ class PersonList extends LitElement {
     args: () => [],
   });
 
+  /**
+   * @param {{id: number, name: string}[]} people
+   */
   renderPersonList(people = []) {
     return html`
       <ul>

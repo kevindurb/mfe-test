@@ -6,13 +6,13 @@ class PersonRouter extends LitElement {
     {
       path: '',
       render: () => html`<person-list></person-list>`,
-      enter: () => import('./person-list.js'),
+      enter: () => import('./person-list.js') && true,
     },
     {
       path: ':personId',
       render: ({ personId }) =>
         html`<person-detail personId=${personId}></person-detail>`,
-      enter: () => import('./person-detail.js'),
+      enter: () => import('./person-detail.js') && true,
     },
   ]);
 

@@ -2,12 +2,22 @@
   "name": "@mfe-test/app-shell",
   "version": "1.0.0",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
-    "start": "http-server ./src -o --cors --port 3000 --proxy http://localhost:3000?"
+    "start": "http-server ./src -o --cors --port 3000 --proxy http://localhost:3000?",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "exports": {
+    "./client.js": {
+      "types": "./dist/client.d.ts",
+      "default": "./src/client.js"
+    }
+  },
+  "dependencies": {
+    "@mfe-test/group-mfe": "^1.0.0",
+    "@mfe-test/person-mfe": "^1.0.0"
+  }
 }

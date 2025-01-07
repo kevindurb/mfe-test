@@ -2,12 +2,22 @@
   "name": "@mfe-test/person-mfe",
   "version": "1.0.0",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
-    "start": "http-server ./src --cors --port 3001"
+    "start": "http-server ./src --cors --port 3001",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@mfe-test/common": "^1.0.0",
+    "@mfe-test/group-mfe": "^1.0.0"
+  },
+  "exports": {
+    "./person-router.js": {
+      "types": "./dist/person-router.d.ts",
+      "default": "./src/person-router.js"
+    }
+  }
 }

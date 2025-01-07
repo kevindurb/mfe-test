@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { Task } from '@lit/task';
 import { gql } from 'graphql-tag';
-import { client } from 'app-shell/client.js';
+import { client } from '@mfe-test/common/client.js';
 import './group-member-list.js';
 
 const groupQuery = gql`
@@ -17,6 +17,11 @@ class GroupDetail extends LitElement {
   static properties = {
     groupId: { type: Number },
   };
+
+  constructor() {
+    super();
+    this.groupId = null;
+  }
 
   #groupDetailTask = new Task(this, {
     task: ([groupId], { signal }) =>

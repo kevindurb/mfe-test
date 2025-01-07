@@ -4,6 +4,7 @@
   "type": "module",
   "devDependencies": {},
   "scripts": {
+    "start": "http-server ./src --cors --port 3003",
     "build": "tsc"
   },
   "keywords": [],
@@ -14,6 +15,10 @@
     "./SQL": {
       "types": "./dist/SQL.d.ts",
       "default": "./src/SQL.js"
+    },
+    "./client.js": {
+      "types": "./dist/client.d.ts",
+      "default": "./src/client.js"
     }
   }
 }

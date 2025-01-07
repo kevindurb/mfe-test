@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "conc -c cyan,yellow,magenta,red,green,blue npm:start:*",
+    "start": "conc -c cyan,yellow,magenta,red,green,blue,purple npm:start:*",
     "start:api-gateway": "npm start --workspace packages/api-gateway",
     "start:app-shell": "npm start --workspace packages/app-shell",
+    "start:common": "npm start --workspace packages/common",
     "start:group-mfe": "npm start --workspace packages/group-mfe",
     "start:group-service": "npm start --workspace packages/group-service",
     "start:person-mfe": "npm start --workspace packages/person-mfe",
-    "start:person-service": "npm start --workspace packages/person-service"
+    "start:person-service": "npm start --workspace packages/person-service",
+    "build": "conc npm:build:*",
+    "build:app-shell": "npm run build --workspace packages/app-shell",
+    "build:common": "npm run build --workspace packages/common",
+    "build:group-mfe": "npm run build --workspace packages/group-mfe",
+    "build:person-mfe": "npm run build --workspace packages/person-mfe"
   },
   "keywords": [],
   "author": "",

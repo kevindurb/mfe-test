@@ -2,12 +2,21 @@
   "name": "@mfe-test/group-mfe",
   "version": "1.0.0",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
-    "start": "http-server ./src --cors --port 3002"
+    "start": "http-server ./src --cors --port 3002",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "exports": {
+    "./group-router.js": {
+      "types": "./dist/group-router.d.ts",
+      "default": "./src/group-router.js"
+    }
+  },
+  "dependencies": {
+    "@mfe-test/common": "^1.0.0"
+  }
 }

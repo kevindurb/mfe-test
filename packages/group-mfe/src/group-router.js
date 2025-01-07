@@ -6,13 +6,13 @@ class GroupRouter extends LitElement {
     {
       path: '',
       render: () => html`<group-list></group-list>`,
-      enter: () => import('./group-list.js'),
+      enter: () => import('./group-list.js') && true,
     },
     {
       path: ':groupId',
       render: ({ groupId }) =>
         html`<group-detail groupId=${groupId}></group-detail>`,
-      enter: () => import('./group-detail.js'),
+      enter: () => import('./group-detail.js') && true,
     },
   ]);
 

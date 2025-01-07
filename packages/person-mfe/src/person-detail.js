@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { Task } from '@lit/task';
 import { gql } from 'graphql-tag';
-import { client } from 'app-shell/client.js';
-import 'group-mfe/person-group-list.js';
+import { client } from '@mfe-test/common/client.js';
+import '@mfe-test/group-mfe/person-group-list.js';
 
 const personQuery = gql`
   query ($personId: ID) {
