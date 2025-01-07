@@ -1,0 +1,23 @@
+type Group {
+  id: ID
+  name: String
+  members: [Person]
+}
+
+type Person @key(fields: "id") {
+  id: ID
+  groups: [Group]
+}
+
+type Query {
+  groups: [Group]
+  group(id: ID): Group
+}
+
+type Mutation {
+  createGroup(name: String): Group
+  addMemberToGroup(personId: ID, groupId: ID): Group
+}
+
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.7", import: ["@key"])

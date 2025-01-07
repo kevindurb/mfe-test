@@ -3,11 +3,9 @@ version: 1
 subgraphs:
   - name: person
     routing_url: http://host.containers.internal:8001/graphql
-    introspection:
-      url: http://localhost:8001/graphql
-      raw: true
+    schema:
+      file: ../../person-service/src/schema.gql
   - name: group
     routing_url: http://host.containers.internal:8002/graphql
-    introspection:
-      url: http://localhost:8002/graphql
-      raw: true
+    schema:
+      file: ../../group-service/src/schema.gql

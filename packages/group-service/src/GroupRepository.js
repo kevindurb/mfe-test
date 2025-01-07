@@ -1,6 +1,7 @@
 import { database } from './Database.js';
 import { GroupModel } from './GroupModel.js';
 import { SQL } from '@mfe-test/common/SQL';
+import { PersonRef } from './PersonRef.js';
 
 /**
  * @typedef {Object} GroupRow
@@ -53,16 +54,30 @@ export class GroupRepository {
   /**
    * @param {GroupModel} group
    */
-  getMemberIds(group) {
+  getPeopleInGroup(group) {
     const rows = /** @type {{ person_id: number }[]} */ (
       SQL`
         select person_id from group_members where group_id = ${group.id}
       `.all(database)
     );
 
-    console.log(group, rows);
+    return rows.map(({ person_id }) => new PersonRef(person_id));
+  }
 
-    return rows.map(({ person_id }) => person_id);
+  /**
+   * @param {number} personId
+   */
+  getGroupsforPerson(personId) {
+    const rows = /** @type {{ id: number, name: string }[]} */ (
+      SQL`
+        select groups.id, groups.name
+        from groups
+        join group_members on groups.id = group_members.group_id
+        where person_id = ${personId}
+      `.all(database)
+    );
+
+    return rows.map(({ id, name }) => new GroupModel(id, name));
   }
 
   /**
@@ -70,7 +85,6 @@ export class GroupRepository {
    * @param {number} personId
    */
   addMemberToGroup(group, personId) {
-    console.log('addMemberToGroup', group.id, personId);
     SQL`
       insert into group_members (group_id, person_id)
       values (${group.id}, ${personId})

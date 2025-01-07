@@ -1,89 +1,53 @@
-import {
-  GraphQLObjectType,
-  GraphQLSchema,
-  GraphQLString,
-  GraphQLID,
-  GraphQLList,
-  extendSchema,
-  parse,
-} from 'graphql';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { readFile } from 'node:fs/promises';
+
+import { gql } from 'graphql-tag';
+import { buildSubgraphSchema } from '@apollo/subgraph';
+
 import { GroupRepository } from './GroupRepository.js';
 import { GroupModel } from './GroupModel.js';
+import { PersonRef } from './PersonRef.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const groupRepository = new GroupRepository();
 
-const groupType = new GraphQLObjectType({
-  name: 'Group',
-  fields: {
-    id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    members: {
-      type: new GraphQLList(GraphQLID),
-      resolve: (group) => groupRepository.getMemberIds(group),
+const resolvers = {
+  Query: {
+    group: (_, { id }) => groupRepository.getOne(id),
+    groups: () => groupRepository.getAll(),
+  },
+  Mutation: {
+    createGroup: (_, { name }) => {
+      const group = new GroupModel(null, name);
+      groupRepository.save(group);
+      return group;
+    },
+    addMemberToGroup: (_, { personId, groupId }) => {
+      const group = groupRepository.getOne(groupId);
+      if (!group) throw new Error('Group Not Found');
+
+      groupRepository.addMemberToGroup(group, personId);
+      return groupRepository.getOne(group.id);
     },
   },
-});
-
-const personType = new GraphQLObjectType({
-  name: 'Person',
-  fields: {
-    groups: {
-      type: new GraphQLList(groupType),
-      resolve: () => [],
+  Person: {
+    groups: ({ id: personId }) => {
+      return groupRepository.getGroupsforPerson(personId);
     },
   },
-});
+  Group: {
+    members: ({ id: groupId }) => {
+      const group = groupRepository.getOne(groupId);
+      if (!group) throw new Error('Group Not Found');
 
-const queryType = new GraphQLObjectType({
-  name: 'Query',
-  fields: {
-    group: {
-      type: groupType,
-      args: {
-        id: { type: GraphQLID },
-      },
-      resolve: (_, { id }) => groupRepository.getOne(id),
-    },
-    groups: {
-      type: new GraphQLList(groupType),
-      resolve: () => groupRepository.getAll(),
+      return groupRepository.getPeopleInGroup(group);
     },
   },
-});
+};
 
-const mutationType = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: {
-    createGroup: {
-      type: groupType,
-      args: {
-        name: { type: GraphQLString },
-      },
-      resolve: (_, { name }) => {
-        const group = new GroupModel(null, name);
-        groupRepository.save(group);
-        return group;
-      },
-    },
-    addMemberToGroup: {
-      type: groupType,
-      args: {
-        groupId: { type: GraphQLID },
-        personId: { type: GraphQLID },
-      },
-      resolve: (_, { groupId, personId }) => {
-        const group = groupRepository.getOne(groupId);
-        if (!group) throw new Error('Group Not Found');
-
-        groupRepository.addMemberToGroup(group, personId);
-        return groupRepository.getOne(group.id);
-      },
-    },
-  },
-});
-
-export const schema = new GraphQLSchema({
-  query: queryType,
-  mutation: mutationType,
-  types: [personType],
+export const schema = buildSubgraphSchema({
+  typeDefs: gql(await readFile(join(__dirname, './schema.gql'), 'utf-8')),
+  resolvers,
 });

@@ -7,6 +7,18 @@ const personQuery = gql`
     person(id: $id) {
       id
       name
+      groups {
+        id
+        name
+        members {
+          id
+          name
+          groups {
+            id
+            name
+          }
+        }
+      }
     }
   }
 `;

@@ -21,11 +21,15 @@
     ]
   },
   "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "@apollo/subgraph": "^2.9.3",
+    "@graphql-tools/load-files": "^7.0.0",
     "better-sqlite3": "^11.7.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "graphql": "^16.10.0",
-    "graphql-http": "^1.22.3"
+    "graphql-http": "^1.22.3",
+    "graphql-tag": "^2.12.6"
   },
   "devDependencies": {
     "@lit-labs/router": "^0.1.3",

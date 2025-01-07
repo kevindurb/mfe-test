@@ -1,58 +1,35 @@
-import {
-  GraphQLObjectType,
-  GraphQLSchema,
-  GraphQLString,
-  GraphQLID,
-  GraphQLList,
-} from 'graphql';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { readFile } from 'node:fs/promises';
+
+import { gql } from 'graphql-tag';
+import { buildSubgraphSchema } from '@apollo/subgraph';
+
 import { PersonRepository } from './PersonRepository.js';
 import { PersonModel } from './PersonModel.js';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const personRepository = new PersonRepository();
 
-const personType = new GraphQLObjectType({
-  name: 'Person',
-  fields: {
-    id: { type: GraphQLID },
-    name: { type: GraphQLString },
+const resolvers = {
+  Query: {
+    person: (_, { id }) => personRepository.getOne(id),
+    people: () => personRepository.getAll(),
   },
-});
-
-const queryType = new GraphQLObjectType({
-  name: 'Query',
-  fields: {
-    person: {
-      type: personType,
-      args: {
-        id: { type: GraphQLID },
-      },
-      resolve: (_, { id }) => personRepository.getOne(id),
-    },
-    people: {
-      type: new GraphQLList(personType),
-      resolve: () => personRepository.getAll(),
+  Mutation: {
+    createPerson: (_, { name }) => {
+      const person = new PersonModel(null, name);
+      personRepository.save(person);
+      return person;
     },
   },
-});
-
-const mutationType = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: {
-    createPerson: {
-      type: personType,
-      args: {
-        name: { type: GraphQLString },
-      },
-      resolve: (_, { name }) => {
-        const person = new PersonModel(null, name);
-        personRepository.save(person);
-        return person;
-      },
-    },
+  Person: {
+    __resolveReference: ({ id }) => personRepository.getOne(id),
   },
-});
+};
 
-export const schema = new GraphQLSchema({
-  query: queryType,
-  mutation: mutationType,
+export const schema = buildSubgraphSchema({
+  typeDefs: gql(await readFile(join(__dirname, './schema.gql'), 'utf-8')),
+  resolvers,
 });
