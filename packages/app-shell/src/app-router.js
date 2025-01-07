@@ -1,22 +1,20 @@
 import { html, LitElement } from 'lit';
 import { Router } from '@lit-labs/router';
+import { redirect } from './utils.js';
 
-class AppShell extends LitElement {
+class AppRouter extends LitElement {
   #router = new Router(this, [
-    {
-      path: '/',
-      enter: () => {
-        window.location.href = '/people/';
-      },
-    },
+    redirect('/', '/people/'),
+    redirect('/people', '/people/'),
     {
       path: '/people/*',
-      render: () => html`<person-router />`,
+      render: () => html`<person-router></person-router>`,
       enter: () => import('person-mfe/person-router.js'),
     },
+    redirect('/groups', '/groups/'),
     {
       path: '/groups/*',
-      render: () => html`<group-router />`,
+      render: () => html`<group-router></group-router>`,
       enter: () => import('group-mfe/group-router.js'),
     },
   ]);
@@ -26,4 +24,4 @@ class AppShell extends LitElement {
   }
 }
 
-customElements.define('app-shell', AppShell);
+customElements.define('app-router', AppRouter);

@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { Task } from '@lit/task';
-import { client, gql } from './graphql.js';
+import { gql } from 'graphql-tag';
+import { client } from 'app-shell/client.js';
 
 const personGroupListQuery = gql`
   query ($personId: ID) {
@@ -15,12 +16,12 @@ const personGroupListQuery = gql`
 
 class PersonGroupList extends LitElement {
   static properties = {
-    personId: { type: Array },
+    personId: { type: Number },
   };
 
   #personGroupListTask = new Task(this, {
-    task: () =>
-      client.request(personGroupListQuery, { personId: this.personId }),
+    task: ([personId], { signal }) =>
+      client.request(personGroupListQuery, { personId }, { signal }),
     args: () => [this.personId],
   });
 
@@ -29,7 +30,10 @@ class PersonGroupList extends LitElement {
       <h3>Groups</h3>
       ${this.#personGroupListTask.render({
         complete: ({ person }) =>
-          person.groups.map((group) => html`<li>${group.name}</li>`),
+          person.groups.map(
+            (group) =>
+              html`<li><a href="/groups/${group.id}">${group.name}</a></li>`,
+          ),
       })}
     `;
   }

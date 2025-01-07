@@ -1,26 +1,20 @@
 import { html, LitElement } from 'lit';
 import { Routes } from '@lit-labs/router';
-import { ContextProvider } from '@lit/context';
-import { routesContext } from './routes-context.js';
 
 class PersonRouter extends LitElement {
   #routes = new Routes(this, [
     {
       path: '',
-      render: () => html`<people-list />`,
-      enter: () => import('./people-list.js'),
+      render: () => html`<person-list></person-list>`,
+      enter: () => import('./person-list.js'),
     },
     {
-      path: ':id',
-      render: ({ id }) => html`<person-detail personId=${id} />`,
+      path: ':personId',
+      render: ({ personId }) =>
+        html`<person-detail personId=${personId}></person-detail>`,
       enter: () => import('./person-detail.js'),
     },
   ]);
-
-  #routesProvider = new ContextProvider(this, {
-    context: routesContext,
-    initialValue: this.#routes,
-  });
 
   render() {
     return html`

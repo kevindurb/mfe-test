@@ -1,7 +1,7 @@
 {
   "name": "@mfe-test/app-shell",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "devDependencies": {},
   "scripts": {
     "start": "http-server ./src -o --cors --port 3000 --proxy http://localhost:3000?"

@@ -5,6 +5,7 @@
     <script type="importmap">
       {
         "imports": {
+          "app-shell/": "http://localhost:3000/",
           "person-mfe/": "http://localhost:3001/",
           "group-mfe/": "http://localhost:3002/",
           "lit": "https://esm.sh/lit",
@@ -12,14 +13,15 @@
           "@lit/task": "https://esm.sh/@lit/task",
           "@lit/context": "https://esm.sh/@lit/context",
           "urlpattern-polyfill": "https://esm.sh/urlpattern-polyfill",
-          "graphql-request": "https://esm.sh/graphql-request"
+          "graphql-tag": "https://esm.sh/graphql-tag",
+          "graphql": "https://esm.sh/graphql"
         }
       }
     </script>
   </head>
 
   <body>
-    <app-shell></app-shell>
+    <app-router></app-router>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
