@@ -15,9 +15,9 @@
     "@mfe-test/group-mfe": "^1.0.0"
   },
   "exports": {
-    "./person-router.js": {
-      "types": "./dist/person-router.d.ts",
-      "default": "./src/person-router.js"
+    "./*.js": {
+      "types": "./dist/*.d.ts",
+      "default": "./src/*.js"
     }
   }
 }

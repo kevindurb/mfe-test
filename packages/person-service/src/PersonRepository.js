@@ -1,6 +1,6 @@
 import { database } from './Database.js';
 import { PersonModel } from './PersonModel.js';
-import { SQL } from '@mfe-test/common/SQL';
+import { SQL } from '@mfe-test/common/SQL.js';
 
 /**
  * @typedef {Object} PersonRow

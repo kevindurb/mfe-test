@@ -11,9 +11,9 @@
   "license": "ISC",
   "description": "",
   "exports": {
-    "./group-router.js": {
-      "types": "./dist/group-router.d.ts",
-      "default": "./src/group-router.js"
+    "./*.js": {
+      "types": "./dist/*.d.ts",
+      "default": "./src/*.js"
     }
   },
   "dependencies": {

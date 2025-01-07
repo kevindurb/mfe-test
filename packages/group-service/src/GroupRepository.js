@@ -1,6 +1,6 @@
 import { database } from './Database.js';
 import { GroupModel } from './GroupModel.js';
-import { SQL } from '@mfe-test/common/SQL';
+import { SQL } from '@mfe-test/common/SQL.js';
 import { PersonRef } from './PersonRef.js';
 
 /**
