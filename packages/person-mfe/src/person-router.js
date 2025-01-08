@@ -11,7 +11,7 @@ class PersonRouter extends LitElement {
     {
       path: ':personId',
       render: ({ personId }) =>
-        html`<person-detail personId=${personId}></person-detail>`,
+        html`<person-detail .personId=${personId}></person-detail>`,
       enter: () => import('./person-detail.js') && true,
     },
   ]);

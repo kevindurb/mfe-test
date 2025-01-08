@@ -15,7 +15,11 @@
     "build:app-shell": "npm run build --workspace packages/app-shell",
     "build:common": "npm run build --workspace packages/common",
     "build:group-mfe": "npm run build --workspace packages/group-mfe",
-    "build:person-mfe": "npm run build --workspace packages/person-mfe"
+    "build:person-mfe": "npm run build --workspace packages/person-mfe",
+    "lit-analyzer": "npm run --silent lit-analyzer:app-shell && npm run --silent lit-analyzer:group-mfe && npm run --silent lit-analyzer:person-mfe",
+    "lit-analyzer:app-shell": "npm run lit-analyzer --workspace packages/app-shell",
+    "lit-analyzer:group-mfe": "npm run lit-analyzer --workspace packages/group-mfe",
+    "lit-analyzer:person-mfe": "npm run lit-analyzer --workspace packages/person-mfe"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +38,8 @@
     "express": "^4.21.2",
     "graphql": "^16.10.0",
     "graphql-http": "^1.22.3",
-    "graphql-tag": "^2.12.6"
+    "graphql-tag": "^2.12.6",
+    "lit-analyzer": "^2.0.3"
   },
   "devDependencies": {
     "@lit-labs/router": "^0.1.3",

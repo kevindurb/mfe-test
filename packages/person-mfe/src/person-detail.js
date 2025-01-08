@@ -46,7 +46,7 @@ class PersonDetail extends LitElement {
   render() {
     return html`
       ${this.#renderDetail()}
-      <person-group-list personId=${this.personId} />
+      <person-group-list .personId=${this.personId}></person-group-list>
     `;
   }
 }

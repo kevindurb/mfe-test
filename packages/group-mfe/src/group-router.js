@@ -11,7 +11,7 @@ class GroupRouter extends LitElement {
     {
       path: ':groupId',
       render: ({ groupId }) =>
-        html`<group-detail groupId=${groupId}></group-detail>`,
+        html`<group-detail .groupId=${groupId}></group-detail>`,
       enter: () => import('./group-detail.js') && true,
     },
   ]);

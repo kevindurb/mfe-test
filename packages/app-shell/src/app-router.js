@@ -17,6 +17,12 @@ class AppRouter extends LitElement {
       render: () => html`<group-router></group-router>`,
       enter: () => import('@mfe-test/group-mfe/group-router.js') && true,
     },
+    redirect('/ssr', '/ssr/'),
+    {
+      path: '/ssr/*',
+      render: () => html`<ssr-app></ssr-app>`,
+      enter: () => import('./ssr-app.js') && true,
+    },
   ]);
 
   render() {

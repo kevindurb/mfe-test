@@ -46,7 +46,7 @@ class GroupDetail extends LitElement {
   render() {
     return html`
       ${this.#renderDetails()}
-      <group-member-list groupId=${this.groupId} />
+      <group-member-list .groupId=${this.groupId}></group-member-list>
     `;
   }
 }
